@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-test-app-service
+spec:
+  selector:
+    app: flask-test-app
+  ports:
+    - protocol: "TCP"
+      port: 6000 # requests to http://<LoadBalancer_IP>:6000 are directed to port 5000 on the pod(s) selected by app:
+      targetPort: 5000
+  type: LoadBalancer # Exposes application to external traffic - route traffic from the internet to the application running in a cluster
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-test-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: flask-test-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flask-test-app
+    spec:
+      containers:
+        - name: flask-test-app
+          image: flask_on_k8s:latest
+          imagePullPolicy: IfNotPresent # Tip 1: Remember to turn off the imagePullPolicy:Always (use imagePullPolicy:IfNotPresent or imagePullPolicy:Never) in your yaml file. Otherwise Kubernetes won’t use your locally build image and it will pull from the network.
+          ports:
+            - containerPort: 5000
+
+# kubectl get svc
+# Run this command to access the application in your localhost browser: 
+# minikube service flask-test-app-service
