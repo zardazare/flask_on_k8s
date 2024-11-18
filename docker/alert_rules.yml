@@ -1,0 +1,11 @@
+groups:
+  - name: flask_app_alerts
+    rules:
+      - alert: HighRequestRate
+        expr: flask_http_request_total > 3
+        for: 3s
+        labels:
+          severity: warning
+        annotations:
+          summary: "High number of requests to Flask app"
+          description: "The total number of HTTP requests has exceeded 3 within the last 3 seconds."

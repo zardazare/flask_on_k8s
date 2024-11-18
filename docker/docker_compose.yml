@@ -1,0 +1,32 @@
+services:
+  flask_with_gunicorn_localhost:
+    container_name: flask_with_gunicorn_localhost
+    image: flask_on_k8s:latest
+    restart: unless-stopped
+    ports:
+      - "9000:5000"
+    networks:
+      - localhost_flask
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    networks:
+      - localhost_flask
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./alert_rules.yml:/etc/prometheus/alert_rules.yml
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    networks:
+      - localhost_flask
+networks:
+  localhost_flask:
+    name: localhost_flask
+    driver: bridge

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      containers:
+      - name: prometheus
+        image: prom/prometheus
+        ports:
+        - containerPort: 9090
+        volumeMounts:
+          - name: config-volume
+            mountPath: /etc/prometheus/prometheus.yml
+            subPath: prometheus.yml
+          - name: alert-rules-volume
+            mountPath: /etc/prometheus/alert_rules.yml
+            subPath: alert_rules.yml
+      volumes:
+        - name: config-volume
+          configMap:
+            name: prometheus-config
+        - name: alert-rules-volume
+          configMap:
+            name: alert-rules-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-service
+spec:
+  selector:
+    app: prometheus
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+
+# kubectl apply -f prometheus_deployment.yml
+# kubectl port-forward svc/prometheus-service 9090:9090

@@ -12,7 +12,7 @@ This is a simple setup for running a Flask application with Gunicorn on Minikube
 1. **Build the Docker image**
 
     ```bash
-    docker build -t flask_on_k8s:latest .
+    docker build -f docker/Dockerfile -t flask_on_k8s:latest .
     ```
     * After building the image, add it to Minikube's cache so it’s available for deployment:
 
@@ -33,7 +33,7 @@ This is a simple setup for running a Flask application with Gunicorn on Minikube
     Apply the Kubernetes deployment and service:
 
     ```bash
-    kubectl apply -f deployment.yml
+    kubectl apply -f deployment/deployment.yml
     ```
 
     - **Hint:** Example for starting multiple nodes:
@@ -57,7 +57,7 @@ This is a simple setup for running a Flask application with Gunicorn on Minikube
     To delete the deployment and service, run:
 
     ```bash
-    kubectl delete -f deployment.yml
+    kubectl delete -f deployment/deployment.yml
     ```
 
 ## Run Without Kubernetes
@@ -97,3 +97,7 @@ If you’d like to run the Docker container independently (outside Kubernetes) f
     ```bash
     kubectl logs deployment/flask-test-app-deployment -c flask-test-app
     ```
+
+## Monitoring Setup
+
+For detailed instructions on setting up and configuring the monitoring tools, check out the [Monitoring Documentation](monitoring/README.md).

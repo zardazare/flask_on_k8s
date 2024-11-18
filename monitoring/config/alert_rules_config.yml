@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alert-rules-config
+data:
+  alert_rules.yml: |
+    groups:
+      - name: flask_app_alerts
+        rules:
+          - alert: HighRequestRate
+            expr: flask_http_request_total > 3
+            for: 10s
+            labels:
+              severity: warning
+            annotations:
+              summary: "High number of requests to Flask app"
+              description: "The total number of HTTP requests has exceeded 3 within 10 seconds."
+
+# kubectl apply -f alert_rules_config.yml
