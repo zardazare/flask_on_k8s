@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, Response
 from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
@@ -8,13 +8,13 @@ metrics = PrometheusMetrics(app)
 
 @app.route("/")
 
-def hello():
+def hello() -> Response:
     return jsonify({"Message": "Hello from Flask with gunicorn WSGI"})
 
 # If you want additional metrics (e.g., for specific endpoints):
 @app.route('/endpoint')
 @metrics.counter('endpoint_counter', 'Count of requests to /endpoint')
-def endpoint():
+def endpoint() -> str:
     return "Endpoint!"
 
 if __name__ == "__main__":

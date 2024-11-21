@@ -9,6 +9,7 @@ gunicorn = "~=23.0"
 prometheus-flask-exporter = "~=0.23"
 
 [dev-packages]
+mypy = "*"
 
 [requires]
 python_version = "3.13"
