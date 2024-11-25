@@ -2,6 +2,12 @@
 
 This is a simple setup for running a Flask application with Gunicorn on Minikube and Docker.
 
+<div align="center">
+
+![Mypy Type Check](https://github.com/zardazare/flask_on_k8s/actions/workflows/mypy_code_check.yml/badge.svg?branch=develop)
+
+</div>
+
 ## Prerequisites
 
 - [Minikube](https://minikube.sigs.k8s.io/docs/start/) installed and running.
