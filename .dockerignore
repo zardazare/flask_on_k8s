@@ -3,3 +3,6 @@
 ./deployment
 ./docker
 ./monitoring
+.github
+.mypy.ini
+.mypy_cache
