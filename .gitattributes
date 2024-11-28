@@ -1,4 +1,4 @@
-flask-test-app-chart/*.yaml linguist-language=YAML
-flask-test-app-chart/*.yml linguist-language=YAML
-flask-test-app-chart/*.tpl linguist-language=Go
+flask-test-app-chart/templates/*.yaml linguist-language=YAML
+flask-test-app-chart/templates/*.yml linguist-language=YAML
+flask-test-app-chart/templates/*.tpl linguist-language=Go
 flask-test-app-chart/Chart.yaml linguist-language=YAML
