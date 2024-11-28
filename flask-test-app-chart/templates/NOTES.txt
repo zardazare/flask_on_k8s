@@ -1,0 +1,14 @@
+{{- if .Values.namespace }}
+# Access your application by running these commands (Unix based):
+
+# Get the service name dynamically
+export SERVICE_NAME=$(kubectl get svc --namespace {{ .Values.namespace }} -o jsonpath="{.items[0].metadata.name}")
+
+# Use Minikube to fetch the LoadBalancer's accessible URL and port
+export SERVICE_URL=$(minikube service $SERVICE_NAME --namespace {{ .Values.namespace }} --url)
+
+echo "Application is accessible at: $SERVICE_URL"
+
+{{- else }}
+No namespace or service information available.
+{{- end }}

@@ -1,0 +1,14 @@
+
+replicaCount: 1
+
+image:
+  repository: flask_on_k8s
+  # This sets the pull policy for images.
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: latest
+
+service:
+  type: LoadBalancer
+  port: 6000
+  targetPort: 5000

@@ -1,0 +1,7 @@
+apiVersion: v2
+name: flask-test-app-chart
+description: A Helm chart for deploying Flask/Gunicorn test app
+type: application
+# Versions are expected to follow Semantic Versioning (https://semver.org/)
+version: 0.1.0
+appVersion: "0.1.0"
