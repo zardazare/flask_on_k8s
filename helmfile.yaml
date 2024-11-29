@@ -1,0 +1,23 @@
+helmDefaults:
+  createNamespace: true
+  # wait: true
+
+releases:
+  - name: flask-test-app-develop
+    # namespace: flask-test-app-develop
+    chart: ./flask-test-app-chart
+    values:
+      - ./flask-test-app-chart/values-develop.yaml
+  - name: flask-test-app-staging
+    # namespace: staging
+    chart: ./flask-test-app-chart
+    values:
+      - ./flask-test-app-chart/values-staging.yaml
+  - name: flask-test-app-production
+    # namespace: production
+    chart: ./flask-test-app-chart
+    values:
+      - ./flask-test-app-chart/values-production.yaml
+
+# helmfile -l name=flask-test-app-develop apply
+# helmfile -l name=flask-test-app-develop delete
